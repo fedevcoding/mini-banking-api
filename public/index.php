@@ -21,9 +21,6 @@ $capsule->addConnection([
     'database' => $_ENV['DB_DATABASE'],
     'username' => $_ENV['DB_USERNAME'],
     'password' => $_ENV['DB_PASSWORD'],
-    'charset' => $_ENV['DB_CHARSET'],
-    'collation' => 'utf8mb4_unicode_ci',
-    'prefix' => '',
 ]);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
