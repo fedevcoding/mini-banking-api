@@ -23,14 +23,13 @@ CREATE TABLE IF NOT EXISTS transactions (
     PRIMARY KEY (id),
     CONSTRAINT fk_transactions_account FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE
 );
+-- DUMMY DATA TEST
 INSERT INTO accounts (owner_name, currency)
 VALUES ('Alice Johnson', 'USD'),
     ('Bob Smith', 'EUR'),
     ('Charlie Davis', 'GBP'),
     ('Diana Prince', 'USD'),
     ('Evan Lee', 'EUR');
--- Assuming account IDs: 1, 2, 3, 4, 5
--- Transactions for Alice Johnson (account_id = 1)
 INSERT INTO transactions (
         account_id,
         type,
@@ -53,7 +52,6 @@ VALUES (
         800.00
     ),
     (1, 'deposit', 500.00, 'Salary deposit', 1300.00);
--- Transactions for Bob Smith (account_id = 2)
 INSERT INTO transactions (
         account_id,
         type,
@@ -75,7 +73,6 @@ VALUES (
         'Grocery shopping',
         1200.00
     );
--- Transactions for Charlie Davis (account_id = 3)
 INSERT INTO transactions (
         account_id,
         type,
@@ -97,7 +94,6 @@ VALUES (
         'Online shopping',
         1750.00
     );
--- Transactions for Diana Prince (account_id = 4)
 INSERT INTO transactions (
         account_id,
         type,
@@ -108,7 +104,6 @@ INSERT INTO transactions (
 VALUES (4, 'deposit', 500.00, 'Initial deposit', 500.00),
     (4, 'withdrawal', 50.00, 'Coffee shop', 450.00),
     (4, 'deposit', 200.00, 'Gift', 650.00);
--- Transactions for Evan Lee (account_id = 5)
 INSERT INTO transactions (
         account_id,
         type,

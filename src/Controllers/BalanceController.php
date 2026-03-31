@@ -99,11 +99,10 @@ class BalanceController
             return $this->error($response, 'Missing target crypto (to)', 400);
         }
 
-        $currency = strtoupper($account->currency);   // e.g. EUR
-        $marketSymbol = $crypto . $currency;              // e.g. BTCEUR
+        $currency = strtoupper($account->currency);
+        $marketSymbol = $crypto . $currency;
         $balance = $account->getBalance();
 
-        // Step 1: Fetch exchangeInfo to verify the symbol exists and is TRADING
         $exchangeInfoUrl = 'https://api.binance.com/api/v3/exchangeInfo';
         $exchangeInfoJson = @file_get_contents($exchangeInfoUrl);
 
@@ -137,7 +136,6 @@ class BalanceController
             );
         }
 
-        // Step 2: Fetch current price
         $priceUrl = "https://api.binance.com/api/v3/ticker/price?symbol={$marketSymbol}";
         $priceJson = @file_get_contents($priceUrl);
 

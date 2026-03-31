@@ -8,7 +8,7 @@ use Slim\App;
 
 return function (App $app): void {
 
-    // --- Transactions ---------------------------------------------------
+    // Transactions
     $app->get(
         '/accounts/{id}/transactions',
         [TransactionController::class, 'index']
@@ -39,14 +39,12 @@ return function (App $app): void {
         [TransactionController::class, 'destroy']
     );
 
-    // --- Balance --------------------------------------------------------
+    // Balance
     $app->get(
         '/accounts/{id}/balance',
         [BalanceController::class, 'balance']
     );
 
-    // IMPORTANT: the specific /convert/* routes must come BEFORE the generic
-    // /balance route to avoid Slim matching /balance as a plain balance call.
     $app->get(
         '/accounts/{id}/balance/convert/fiat',
         [BalanceController::class, 'convertFiat']

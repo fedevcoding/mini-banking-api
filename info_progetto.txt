@@ -1,0 +1,44 @@
+Componenti gruppo: Cavallini, Castagnozzi, Zaccone
+
+Schema del database: ./database/schema.sql
+
+Elenco degli endpoint realizzati (con esempio chiamata)
+    - GET /accounts/{id}/transactions
+        curl http://localhost:8080/accounts/1/transactions
+
+    - GET /accounts/{id}/transactions/{txId}
+        curl http://localhost:8080/accounts/1/transactions/1
+
+    - POST /accounts/{id}/deposits
+        curl -X POST http://localhost:8080/accounts/1/deposits \
+        -H "Content-Type: application/json" \
+        -d '{"amount": 1000, "description": "Stipendio Marzo"}'
+
+    - POST /accounts/{id}/withdrawals
+        curl -X POST http://localhost:8080/accounts/1/withdrawals \
+        -H "Content-Type: application/json" \
+        -d '{"amount": 150.50, "description": "Spesa supermercato"}'
+
+    - PUT /accounts/{id}/transactions/{txId}
+        curl -X PUT http://localhost:8080/accounts/1/transactions/1 \
+        -H "Content-Type: application/json" \
+        -d '{"description": "Bonifico in entrata aggiornato"}'
+
+    - DELETE /accounts/{id}/transactions/{txId}
+        curl -X DELETE http://localhost:8080/accounts/1/transactions/3
+
+    - GET /accounts/{id}/balance
+        curl http://localhost:8080/accounts/1/balance
+
+    - GET /accounts/{id}/balance/convert/fiat
+        curl "http://localhost:8080/accounts/1/balance/convert/fiat?to=USD"
+
+    - GET /accounts/{id}/balance/convert/cryptos
+        curl "http://localhost:8080/accounts/1/balance/convert/crypto?to=BTC"
+
+
+Scelte progettuali:
+    Abbiamo scelto Slim 4 come framework, perfetto per API REST, insieme all'ORM illuminate.
+    Il codice è diviso in Models e Controllers, separando la logica dei dati dalla gestione delle richieste HTTP.
+    Si può cancellare solo l'ultima transazione del conto. È la regola più semplice per mantenere la consistenza, infatti eliminare una transazione nel mezzo dello storico renderebbe i balance_after precedenti errati.
+    Come suggerito dalla traccia, il progetto gestisce un singolo conto in EUR. Questo semplifica la logica di conversione.
